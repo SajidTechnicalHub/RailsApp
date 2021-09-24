@@ -1,0 +1,173 @@
+
+
+<div class="container">
+<div class="row justify-content-center ">
+  <div class="col-8 justify-content-center align-items-center" >
+    <div class="card">
+      <div class="card-body">
+        
+      
+        <div id="carouselExampleIndicators" class="carousel slide border-primary bg-dark" data-ride="carousel">
+      <ol class="carousel-indicators">
+        <li data-target="#carouselExampleIndicators" data-slide-to="0" class="active"></li>
+        <li data-target="#carouselExampleIndicators" data-slide-to="1"></li>
+        <li data-target="#carouselExampleIndicators" data-slide-to="2"></li>
+    
+      </ol>
+      <div class="carousel-inner">
+        <div class="carousel-item active">
+          <%= image_tag(@product.avatar, class:"d-block w-50 h-50 rounded mx-auto d-block" ) %>
+        </div>
+        <div class="carousel-item">
+          <%= image_tag(@product.avatar, class:"d-block w-50 h-50 rounded mx-auto d-block ") %>
+        </div>
+        <div class="carousel-item">
+          <%= image_tag(@product.avatar, class:"d-block w-50 h-50 rounded mx-auto d-block ") %>
+        </div>
+      </div>
+      <a class="carousel-control-prev" href="#carouselExampleIndicators" role="button" data-slide="prev">
+        <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+        <span class="sr-only">Previous</span>
+      </a>
+      <a class="carousel-control-next" href="#carouselExampleIndicators" role="button" data-slide="next">
+        <span class="carousel-control-next-icon" aria-hidden="true"></span>
+        <span class="sr-only">Next</span>
+      </a>
+    </div>
+
+    </div>
+    </div>
+
+  </div>
+
+  <div class="col-4">
+    <h4>Username:</h4>
+    <h4>Email: <%= @product.user.email %></h4>
+    <p>Addess:</p>
+    <p>Contact:</p>
+  </div>
+</div>
+</div>
+
+<div class="container">
+  <div class="row">
+    <div class="col-lg-8 col-md-4 justify-content-center align-items-center">
+      <div class="row ">
+        <div class="col-12 justify-content-center align-items-center">
+          <div class="card">
+            <div class="card-body">
+              <div class="card-deck">
+
+               <div class="card">
+                  <%= image_tag(@product.avatar, class:"card-img-top") %>
+              </div>
+              <div class="card">
+                <%= image_tag(@product.avatar, class:"card-img-top") %>
+              </div>
+              <div class="card">
+                <%= image_tag(@product.avatar, class:"card-img-top") %>
+              </div>
+               <div class="card">
+                <%= image_tag(@product.avatar, class:"card-img-top") %>
+              </div>
+              <div class="card">
+                <%= image_tag(@product.avatar, class:"card-img-top") %>
+              </div>
+            </div>
+          </div>
+        </div>
+    </div>
+  <div class="row col-12">
+    <div class="col-12 m-2">
+    <div class="average-review-rating" data-score= "<%= @average_rating %>"></div>
+    <span>Based on <%= @product.ratings.count  %> reviews.</span><br>
+    </div>
+  </div>
+  <div class="row col-12">
+    <div class="col-12">
+      <div class="card">
+        <div class="card-body">
+          <div class="row">
+            <div class="col-8"><h4>Details</h4></div>
+            <div class="col-4 mb-2 ">
+              <%= form_for @order_item, remote: true do |f| %>
+                <%= f.hidden_field :product_id, :value => @product.id %>
+                <%= f.hidden_field :quantity, :value => 1, :min => 1 %>
+                <%= f.submit 'Add to Cart', class: 'btn btn-warning' %>
+              <% end %>
+            </div>
+          </div>
+          
+          <table class="table">
+            <thead>
+              <tr >
+                <th>Product Name</th>
+                <th>Price</th>
+                <th>Category</th>
+              </tr>
+            </thead>
+            <tr>
+              <td><%= @product.name %></td>
+              <td><%= @product.price %></td>
+              <td><%= @product.category.name %></td>
+            </tr>
+          </table>
+          <hr style="width:100%; ">
+          <h4>Description</h4>
+          <p><%= @product.desc %></p>
+        </div>
+      </div>
+    </div>   
+  </div>
+
+  </div>
+    </div>
+    <div class="col-lg-4 ">
+      <h4>Product Review</h4>
+      <h4>Title:<%=@product.name  %></h4>
+        <% if @product.ratings.blank? %>
+          <p>NO Review Yet! </p>
+        <% else %>
+          <% @product.ratings.each do |r| %>
+          <p>Review
+            <div class="star-rating" data-score = "<%= r.rating %>"> </div></p>
+            <p><span>Comments: </span><%= r.comment %></p>
+            <p><%= link_to 'Edit', edit_product_rating_path(r)%>| <%= link_to 'Delete', product_rating_path(r.id), method: :delete%> </p>
+            <hr>
+          <% end %>
+         <% end %>
+         
+          <%= link_to 'Write a Review', new_product_rating_path(@product) %> 
+    </div>
+  </div>
+</div>
+
+
+
+<%= link_to 'Edit', edit_product_path(@product) %> |
+<%= link_to 'Back', products_path %>
+
+
+
+<script>
+  $('.star-rating').raty({
+    path: '/assets/',
+    readOnly: true,
+    score: function(){
+      return $(this).attr('data-score');
+    }
+
+  });
+</script>
+
+<script>
+  $('.average-review-rating').raty({
+    readOnly: true,
+    path: '/assets/',
+    score: function(){
+      return $(this).attr('data-score');
+    }
+
+  });
+</script>
+

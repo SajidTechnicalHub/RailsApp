@@ -1,0 +1,57 @@
+
+<h1>Cart Items</h1>
+<p id="notice"><%= notice %></p>
+
+
+<table class="table  table-hover ">
+  <thead class="thead-light" >
+    <tr>
+    	<th></th>
+      <th>Item Name</th>
+      <th>Unit Price</th>
+      <th>Sub 	Total</th>
+      <th>Quantity</th>
+      <th><%= link_to 'More Shop', root_path, class: 'btn btn-warning' %></th>
+      
+    </tr>
+  </thead>
+  <tbody >
+  	<% @order_items.each do |item| %>
+  	<tr>
+  		<td style="vertical-align: middle;">
+  			<% if item.product.avatar.attached? %>
+         <%= link_to image_tag(item.product.avatar, style:'max-width: 200px; and max-height: 200px;'), product_path(item.product.id) %>
+        <% end %>
+  		</td>
+  		<td style="vertical-align: middle;"><h5><%= item.product.name %></h5></td>
+  		<td style="vertical-align: middle;"><h5><%= item.product.price %></h5></td>
+  		<td style="vertical-align: middle;"><h5 ><%= item.total %></h5></td>
+  		<%= form_for item do |f| %>
+	  		<td style="vertical-align: middle;" >
+					<%= f.hidden_field :product_id, :value => item.product.id %>
+					<%= f.number_field :quantity, :value => item.quantity.to_i, style: 'max-width:30px' %>
+					<%= f.submit "Update Item" %>
+			</td>
+			<td style="vertical-align: middle;">
+				<%= link_to 'Remove Item', order_item_path(item), method: :delete, data: { confirm: 'Are you sure?' }  %>
+			</td>
+		<%end %>
+		
+  	</tr>
+  <% end %>
+  	<tr>
+  		<td><h5>Total Item(s) you have selected:</h5></td>
+  		<td><h5><%= current_order.order_items.size %></h5></td>
+  		<td><h5>Total Price:</h5></td>
+  		<td>
+				<h5><%= current_order.subtotal %></h5>
+		</td>
+		<td></td>
+		<td><%= link_to 'Order Now',root_path, class: 'btn btn-outline-info' %></td>
+  	</tr>
+  	
+  </tbody>
+</table>
+
+
+

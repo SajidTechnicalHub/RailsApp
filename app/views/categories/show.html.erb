@@ -1,0 +1,23 @@
+
+  <% if user_signed_in? && current_user.status == 'moderator' %>
+    <div class="container">
+     <div class="row justify-content-center">
+       <div class="col-6">
+        <div class="card">
+          <h5 class="card-title mt-2"><center>Category Name: <%= @category.name %></center></h5>
+            <% if @category.avatar.attached? %>
+                <%= image_tag(@category.avatar) %>
+              <% end %>
+            <div class="card-body">
+              
+              
+              <p class="card-text"><center><small class="text-muted">Last updated on <%=@category.updated_at %></small></center></p>
+              <%= link_to 'Back', categories_path %> 
+            </div>
+        </div>
+      </div>
+    </div>
+ <% end %>
+
+
+

@@ -1,0 +1,22 @@
+<div class="container">
+  <div class="card">
+    <h5 class="card-header">Products</h5>
+     <div class="row">
+      <% @cproduct.each do |product| %>
+       <div class="col-3 my-2">
+        <div class="card">
+            <% if product.avatar.attached? %>
+                <%= image_tag(product.avatar) %>
+              <% end %>
+            <div class="card-body">
+              <h5 class="card-title"> <%= link_to product.name, product %> | Rs: <%= product.price %></h5>
+              <h6>Category: <%= link_to product.category.name, product_path(product.category)  %></h6>
+              <p class="card-text"><small class="text-muted">Last updated on <%=product.updated_at %></small></p>
+              <p><center> <%= link_to 'See More...', product %> </center> </p>
+            </div>
+        </div>
+      </div>
+      <% end %>
+    </div>
+  </div>
+</div>

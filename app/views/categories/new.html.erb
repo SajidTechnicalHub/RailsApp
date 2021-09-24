@@ -1,0 +1,8 @@
+
+<% if user_signed_in? && current_user.status == 'moderator' %>
+<h3>New Category</h3>
+	<%= render 'form', category: @category %>
+	<%= link_to 'Back', categories_path%>
+	<% else %>
+	<%= render 'layouts/message' %>
+<% end %>
