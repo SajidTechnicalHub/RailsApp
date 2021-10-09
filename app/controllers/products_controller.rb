@@ -1,13 +1,11 @@
 class ProductsController < ApplicationController
   before_action :set_product, only: %i[ show edit update destroy ]
   before_action :authenticate_user!, only:[:new, :edit]
+ 
+  $average_rating = 0
 
   # GET /products or /products.json
   def index
-
-    session[:items] +=1
-    @visit_count = session[:items]
-
     # Category Search by name onclick dropdown menu.
      if params[:category]
       #@products = Product.all.order("created_at DESC")
@@ -34,9 +32,9 @@ class ProductsController < ApplicationController
     @order_item = current_order.order_items.new
 
     if @product.ratings.blank?
-      @average_rating = 0
+      $average_rating = 0
     else
-      @average_rating = @product.ratings.average(:rating).round(2)
+      $average_rating = @product.ratings.average(:rating).round(2)
     end
     
   end
@@ -91,22 +89,7 @@ class ProductsController < ApplicationController
     end
   end
 
-  def add_to_cart
 
-    id = params[:id].to_i
-    session[:cart]  << id unless session[:cart].include?(id)
-    redirect_to show_cart_path
-
-  end
-
-  def show_cart
-    @cart = Product.find(session[:cart])
-  end
-
-  def remove_from_cart
-    id = params[:id].to_i
-    session[:cart].delete(id)
-  end
 
   private
     # Use callbacks to share common setup or constraints between actions.
@@ -115,6 +98,14 @@ class ProductsController < ApplicationController
       authorize @product
     end
 
+    def initialize_session
+      session[:cart] ||= []
+    end
+
+    def load_cart
+      @cart = session[:cart]
+
+    end
 
     # Only allow a list of trusted parameters through.
     def product_params

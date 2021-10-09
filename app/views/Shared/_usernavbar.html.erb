@@ -1,4 +1,7 @@
-<nav class="navbar navbar-expand-lg navbar-light bg-white">
+
+
+
+<nav class="navbar navbar-expand-lg navbar-light bg-white ">
   <li class="navbar-brand dropdown">
         <div class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
           All Categories 
@@ -17,28 +20,25 @@
   </button>
 
   <div class="collapse navbar-collapse" id="navbarSupportedContent">
-    <ul class="navbar-nav mr-auto align-items-center">
-      <li class="nav-item active ml-3">
+    <ul class="navbar-nav">
+      <li class="nav-item active mx-3 font-weight-normal">
         <%= link_to 'Mobiles', products_url(id: '5') %>
       </li>
-      <li class="nav-item active ml-3">
+      <li class="nav-item  mx-3 font-weight-normal">
         <%= link_to 'Cars', products_url(id: '12') %>
       </li>
-      <li class="nav-item active ml-3">
+      <li class="nav-item  mx-3 font-weight-normal">
         <%= link_to 'Motor Cycles', products_url(id: '56') %>
       </li>
-      <li class="nav-item active ml-3">
+      <li class="nav-item  mx-3 font-weight-normal">
         <%= link_to 'Houses', products_url(id: '57') %>
       </li>
-      <li class="nav-item ml-3">
+      <li class="nav-item mx-3 font-weight-normal">
         <%= link_to 'Animals', products_url(id: '18') %>
       </li>
       
     </ul>
-    <form class="form-inline my-2 my-lg-0" action="search">
-      <input class="form-control mr-sm-2" name="q" type="search" placeholder="Search" aria-label="Search">
-      <button class="btn btn-outline-success my-2 my-sm-0" type="submit">Search</button>
-    </form>
-    <%= link_to 'Add Product', new_product_path, class: ' ml-3 btn btn btn-outline-primary' %>
+    
+    
   </div>
 </nav>

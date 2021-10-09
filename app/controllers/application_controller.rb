@@ -1,9 +1,6 @@
 class ApplicationController < ActionController::Base
-
   before_action :initialize_session
-  before_action :load_cart
-  before_action :count_card_items
-
+  before_action :count_total
   include ApplicationHelper
 
 	include Pundit
@@ -30,13 +27,11 @@ class ApplicationController < ActionController::Base
       session[:cart] ||= []
     end
 
-    def count_card_items
-      session[:items] ||=0
+    def count_total
+      session[:total]=0
     end
 
-    def load_cart
-      @cart = Product.find(session[:cart])
-    end
+    
 end
 
 

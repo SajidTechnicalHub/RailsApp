@@ -1,0 +1,26 @@
+<%= form_for @rating, url: ratings_path do |form| %>
+  
+
+  <div id="rating-form">
+    <%= form.label :rating %>
+    
+  </div>
+
+  <div class="field">
+    <%= form.label :comment %>
+    <%= form.text_area :comment %>
+  </div>
+
+
+  <div class="actions">
+    <%= form.submit %>
+  </div>
+<% end %>
+
+<script>
+  $('#rating-form').raty({
+    path: '/assets/',
+    scoreName: "rating[rating]"
+
+  });
+</script>

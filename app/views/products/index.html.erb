@@ -1,36 +1,55 @@
-<%= pluralize @visit_count, 'time' %>
-<%= debug session[:cart] %>
+
 
 <div class="container">
-  <div class="card">
-    <h5 class="card-header">Products</h5>
+   <h5>Products</h5>
      <div class="row">
       <% @products.each do |product| %>
-       <div class="col-lg-3 col-md-12 my-2">
-        <div class="card" style="tyle:'max-width: 250px; max-height: 250px; '">
+       <div class="col-lg-3 col-xs-12 col-md-6 ng-scope my-3">
+        <div class="card card-hover">
             <% if product.avatar.attached? %>
-                <%= link_to image_tag(product.avatar, style:'max-width: 250px; max-height: 250px; display: block; margin-left: auto; margin-right: auto;'), product_path(product) %>
+                <%= link_to image_tag(product.avatar, class: 'card-img'), product_path(product) %>
               <% end %>
             <div class="card-body">
-              <h6 class="card-title"> <%= link_to product.name, product %> | Rs: <%= product.price %></h6>
-              <h6>Category: <%= link_to product.category.name, category_path(product.category)  %></h6>
-              <p class="card-text"><small class="text-muted">Last updated on <%=product.updated_at %></small></p>
-
+              <h6 class="font-weight-bold text-center font-weight-normal text-capitalize" >
+                 <%= link_to product.category.name, products_path(id:product.category.id)%>:
+                <%= link_to product.name, product %> 
+               </h6>
+              <h6 class="font-weight-bold text-center green">Rs:<%= product.price %></h6>
+                
               <% if user_signed_in? && current_user.status == 'moderator' %>
+            
                     <center> <%= link_to 'Edit', edit_product_path(product) %> |
                     
-                    <%= link_to 'Destroy', product_path(product), method: :delete, data: { confirm: 'Are you sure?' } %> | <%= link_to 'More Details', product %> </center>
+                    <%= link_to 'Destroy', product_path(product), method: :delete, data: { confirm: 'Are you sure?' } %></center>
+                    
+                      <%= form_for :cart, url: carts_path do |f| %>
+                       <%= f.hidden_field :product_id, :value => product.id %>
+                          <%= f.hidden_field :product_quantity, value: 1 %>
+                           <span >
+                            <i class="fa fa-shopping-cart add-to-cart-btn-setting"></i>
+                            <%= f.submit "Add to Cart", class:'add-to-cart-btn' %>
+                           </span>
+                    <% end %>
                    <% else %>
-                   <center><%= link_to 'More Details', product %> </center>
-                   
+                     <center> <div class="average-review-rating" data-score= "<%= $average_rating %>"></div>
+                      
+                      </center>
+                      
+                      <%= form_for :cart, url: carts_path do |f| %>
+                        <%= f.hidden_field :product_id, :value => product.id %>
+                        <%= f.hidden_field :product_quantity, value: 1 %>
+                         <span>
+                        <i class="fa fa-shopping-cart add-to-cart-btn-setting"></i>
+                        <%= f.submit "Add to Cart", class:'add-to-cart-btn' %> 
+                        </span>
+                      <%end %>
               <% end %>
-   
             </div>
         </div>
       </div>
       <% end %>
     </div>
-  </div>
+ 
   <nav aria-label="justify-content-cente">
     <ul class="pagination">
       <li class="page-item disabled">
@@ -47,3 +66,4 @@
     </ul>
 </nav>
 </div>
+

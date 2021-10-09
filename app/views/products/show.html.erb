@@ -2,7 +2,7 @@
 
 <div class="container">
 <div class="row justify-content-center ">
-  <div class="col-8 justify-content-center align-items-center" >
+  <div class="col-8 " >
     <div class="card">
       <div class="card-body">
         
@@ -45,6 +45,22 @@
     <h4>Email: <%= @product.user.email %></h4>
     <p>Addess:</p>
     <p>Contact:</p>
+    <div class="card">
+      <div class="card-body">
+        <%= form_for :cart, url: carts_path do |f| %>
+        <div class="field">
+          <%= f.hidden_field :product_id, :value => @product.id %>
+        </div>
+        <div class="field">
+          <%= f.number_field :product_quantity, placeholder: 'Select Quantity', class: 'form-control'  %>
+        </div>
+           <span>
+            <%= f.submit "Add to Cart", class:'add-to-cart-btn' %> 
+          </span>
+        <%end %><br>
+        <%= button_to 'Buy Now', checkouts_path, remote: true, params:{id: @product.id}, class:'add-to-cart-btn' %>
+      </div>
+    </div>
   </div>
 </div>
 </div>
@@ -79,7 +95,7 @@
     </div>
   <div class="row col-12">
     <div class="col-12 m-2">
-    <div class="average-review-rating" data-score= "<%= @average_rating %>"></div>
+    <div class="average-review-rating" data-score= "<%= $average_rating %>"></div>
     <span>Based on <%= @product.ratings.count  %> reviews.</span><br>
     </div>
   </div>
@@ -88,14 +104,10 @@
       <div class="card">
         <div class="card-body">
           <div class="row">
-            <div class="col-8"><h4>Details</h4></div>
-            <div class="col-4 mb-2 ">
-              <%= form_for @order_item, remote: true do |f| %>
-                <%= f.hidden_field :product_id, :value => @product.id %>
-                <%= f.hidden_field :quantity, :value => 1, :min => 1 %>
-                <%= f.submit 'Add to Cart', class: 'btn btn-warning' %>
-              <% end %>
+            <div class="col-12">
+              <h4>Details</h4>
             </div>
+           
           </div>
           
           <table class="table">
@@ -122,18 +134,39 @@
 
   </div>
     </div>
-    <div class="col-lg-4 ">
-      <h4>Product Review</h4>
-      <h4>Title:<%=@product.name  %></h4>
+    <div class="col-lg-4  ">
+      <h4>Product Reviews</h4>
         <% if @product.ratings.blank? %>
-          <p>NO Review Yet! </p>
+          <p>No Review Yet! Give first Review. </p>
         <% else %>
           <% @product.ratings.each do |r| %>
-          <p>Review
-            <div class="star-rating" data-score = "<%= r.rating %>"> </div></p>
-            <p><span>Comments: </span><%= r.comment %></p>
-            <p><%= link_to 'Edit', edit_product_rating_path(r)%>| <%= link_to 'Delete', product_rating_path(r.id), method: :delete%> </p>
-            <hr>
+          <div class="row align-items-center">
+            <div class="col-5  d-flex flex-row align-items-center">
+              <div class=" mr-1">
+                <%= link_to image_tag("1.jpg", {class:'comment-profile'}), root_path %>
+              </div>
+              <span class="font-weight-bold align-items-center"><%= link_to 'Username', root_path %></span>
+            </div>
+            <div class="col-7 align-items-center">
+              <div class="star-rating" data-score = "<%= r.rating %>"> </div>
+            </div>
+          </div>
+          <div class="row">
+            <div class="col-2"></div>
+             <div class="col-10  comment">
+               <%= r.comment %>
+             </div>
+          </div>
+          <div class="row">
+            <div class="col-3"></div>
+            <div class="col-1">
+              <span><%= link_to 'like', '#', class:'nav-link' %></span>
+            </div>
+            <div class="col-1">
+               <span><%= link_to 'Reply', '#', class:'nav-link' %></span>
+            </div>
+          </div>
+            
           <% end %>
          <% end %>
          
@@ -169,5 +202,13 @@
     }
 
   });
+</script>
+
+<script>
+  $(document).ready(function(){
+  $("").click(function(){
+    $(this).hide();
+  });
+});
 </script>
 

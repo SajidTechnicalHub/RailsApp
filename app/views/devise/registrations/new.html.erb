@@ -26,7 +26,8 @@
 
         <div class="field">
           <%= f.label :User_Status %><br />
-          <%= f.select :status, ['moderator', 'buyer'], class:"form-control", prompt: "Select User Type"%>
+          <%= f.select :status, ['moderator', 'buyer'],{ prompt:'Chose User Status' }, { class: 'form-control' }%>
+
         </div>
 
         <div class="actions">

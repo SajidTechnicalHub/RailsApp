@@ -3,15 +3,51 @@
   <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
     <span class="navbar-toggler-icon"></span>
   </button>
+
   <div class="collapse navbar-collapse" id="navbarNav">
+    <div class="col-md-6 ml-auto">
+      <div class="header-search">
+          <form class=" d-flex flex-row">
+              <button  class="search-btn custom-search-btn">Categories</button>
+              <input class="input " name="q" placeholder="Search here">
+              <button class="search-btn" style="max-width:50px;" type="submit"><i class="fa fa-search fs-18"></i></button>
+          </form>
+          
+      </div>
+  </div>
+
     <ul class="navbar-nav ml-auto">
       <% if user_signed_in? %>
-        <% if current_user.status == 'moderator' %>
-            <%= link_to 'Category', categories_path, class: 'nav-link' %> 
-            <%= link_to 'All Products', products_path, class: 'nav-link' %>
-        <% end %>
-        <%= link_to current_user.email, products_path , class: 'nav-link' %>
-        <%= link_to 'Sign Out', destroy_user_session_path, method: :delete, class: 'nav-link' %> 
+       
+          <li class=" dropdown">
+            <div class="nav-link dropdown-toggle d-flex flex-row" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+              
+              <div class=" nav-link">
+                <%= image_tag("1.jpg", {class:'profile'}) %>
+              </div>
+              <span class="mt-2">My Profile</span>
+            
+            </div>
+            <ul class="dropdown-menu " aria-labelledby="navbarDropdown">
+              <li class="dropdown-item">
+                <%= link_to 'My Account', accounts_path, class: 'nav-link' %>
+              </li>
+               <% if current_user.status == 'moderator' %>
+                <li class="dropdown-item">
+                  <%= link_to 'Category', categories_path, class: 'nav-link' %> 
+                </li>
+                <li class="dropdown-item">
+                  <%= link_to 'All Products', products_path, class: 'nav-link' %>
+                </li>
+                <li class="dropdown-item">
+                  <%= link_to 'Add Products', new_product_path, class: 'nav-link' %>
+                </li>
+              <% end %>
+              <li class="dropdown-item">
+                <%= link_to 'Sign Out', destroy_user_session_path, method: :delete, class: 'nav-link' %> 
+              </li>
+            </ul>
+          </li>
       <% else %>
          <li class="nav-item">
         <%= link_to 'Register',new_user_registration_path, class: 'nav-link' %>
@@ -21,8 +57,19 @@
         </li>
       
       <% end %>
-     
+     <a href="/carts/index">
+      <li class="nav-item mr-3 ml-2">
+        
+        <span class="main-cart-count">
+            <i class="fa fa-shopping-cart fa-2x " style="color: green;"></i>
+          <br>
+          <span >My Cart
+            <span class="cart-count"><%= session[:cart].size %></span>
+          </span>
+         </span>
+      </li></a>
     </ul>
   </div>
 
+  
 </nav>

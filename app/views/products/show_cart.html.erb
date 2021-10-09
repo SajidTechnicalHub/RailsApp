@@ -1,1 +1,10 @@
-<h1>this is show_cart</h1>
+
+<%= debug @cart%>
+<% @cart.each do |cart| %>
+ 
+  <% product = Product.find_by(id: cart["id"]) %>
+
+  <%= product.inspect %>
+  <%= cart["quantity"] %>
+<% end %>
+
