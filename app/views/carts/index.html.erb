@@ -58,10 +58,13 @@
        <td style="vertical-align: middle;"><h5>Rs: <%= session[:total] %></h5></td>
     
     <td style="vertical-align: middle;"><%= link_to 'KEEP SHOPPING', root_path, class: 'btn btn-warning' %></td>
+
     <% if @carts.size == 0 %>
-      <%= flash[:notice] = "Empty Cart.." %>
+      <div class="text-center">
+        <h2>Cart Empty!</h2>
+      </div>
       <% else %>
-        <td style="vertical-align: middle;"><%= button_to 'Buy Now', checkouts_path, remote: true, class:'add-to-cart-btn' %></td>
+        <td style="vertical-align: middle;"><%= link_to 'proceed to checkout', shippings_path, class:'btn btn-outline-success text-uppercase' %></td>
     <% end %>
     <td></td>
     </tr>

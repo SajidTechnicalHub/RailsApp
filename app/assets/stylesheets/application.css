@@ -82,6 +82,7 @@ nav li a:hover, nav li a:focus{
     -webkit-transition: 0.2s all;
     transition: 0.2s all;
     width: 100%;
+    cursor: pointer;
 }
     
 .add-to-cart-btn:hover{
@@ -95,7 +96,7 @@ nav li a:hover, nav li a:focus{
     border-radius: 40px;
     transition: 0.2s all;
     width: 100%;
-   
+   cursor: pointer;
 }
 .add-to-cart-btn-setting{
      position: absolute;

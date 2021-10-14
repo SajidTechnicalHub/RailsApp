@@ -1,0 +1,29 @@
+<% @product.ratings.each do |r| %>
+          <div class="row align-items-center">
+            <div class="col-5  d-flex flex-row align-items-center">
+              <div class=" mr-1">
+                <%= link_to image_tag("1.jpg", {class:'comment-profile'}), root_path %>
+              </div>
+              <span class="font-weight-bold align-items-center"><%= link_to 'Username', root_path %></span>
+            </div>
+            <div class="col-7 align-items-center">
+              <div class="star-rating" data-score = "<%= r.rating %>"> </div>
+            </div>
+          </div>
+          <div class="row">
+            <div class="col-2"></div>
+             <div class="col-10  comment">
+               <%= r.comment %>
+             </div>
+          </div>
+          <div class="row">
+            <div class="col-3"></div>
+            <div class="col-1">
+              <span><%= link_to 'like', '#', class:'nav-link' %></span>
+            </div>
+            <div class="col-1">
+               <span><%= link_to 'Reply', '#', class:'nav-link' %></span>
+            </div>
+          </div>
+            
+          <% end %>

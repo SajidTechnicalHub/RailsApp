@@ -1,1 +1,17 @@
-<h1>Thanks for Shoping!</h1>
+<h1>Your Shipping details</h1>
+<% @shippings.each do |ship| %>
+<% if current_user.id == ship.user_id %>
+<table>
+  <thead>
+    <th>Name</th>
+    <th>Address</th>
+  </thead>
+  <tbody>
+    <tr>
+      <td><%= ship.fname %></td>
+      <td><%= ship.address %></td>
+    </tr>
+  </tbody>
+</table>
+  <%end%>
+  <%end%>

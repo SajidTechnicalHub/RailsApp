@@ -1,10 +1,12 @@
 Rails.application.routes.draw do
 
+  get 'shippings/index'
   get 'checkouts/index'
   get 'accounts/index'
   get 'carts/index'
   resources :accounts, only:[:index]
   resources :checkouts
+  resources :shippings
   resources :homes
   resources :products do
     resources :ratings, except:[:show, :index]
