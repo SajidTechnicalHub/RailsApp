@@ -1,6 +1,13 @@
 
 <% if user_signed_in? && current_user.status == 'moderator' %>
-<h3>All Categories</h3>
+<nav aria-label="breadcrumb">
+      <ol class="breadcrumb">
+        <li class="breadcrumb-item">
+          <%= link_to 'Home', root_path %>
+        </li>
+        <li class="breadcrumb-item active" aria-current="page">Categories</li>
+      </ol>
+    </nav>
 <div class="card">
   <div class="card-body">
 <table class="table  table-hover ">

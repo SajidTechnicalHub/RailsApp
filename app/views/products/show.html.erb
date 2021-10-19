@@ -1,6 +1,17 @@
 
-
+ <nav aria-label="breadcrumb">
+      <ol class="breadcrumb">
+        <li class="breadcrumb-item">
+          <%= link_to 'Home', root_path %>
+        </li>
+        <li class="breadcrumb-item">
+          <%= link_to 'Products', root_path %>
+        </li>
+        <li class="breadcrumb-item active" aria-current="page"><%= @product.name %></li>
+      </ol>
+    </nav>
 <div class="container">
+ 
 <div class="row justify-content-center ">
   <div class="col-8 " >
     <div class="card">
