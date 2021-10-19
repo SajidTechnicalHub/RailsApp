@@ -28,7 +28,7 @@ class ApplicationController < ActionController::Base
     end
 
     def count_total
-      session[:total]=0
+      session[:total]=0 #unless session[:total].blank?
     end
 
     

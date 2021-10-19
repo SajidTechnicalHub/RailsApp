@@ -49,13 +49,14 @@
           <%= f.hidden_field :product_id, :value => @product.id %>
         </div>
         <div class="field">
-          <%= f.number_field :product_quantity, placeholder: 'Select Quantity', class: 'form-control'  %>
+          <%= f.number_field :product_quantity, value:1, class: 'form-control'  %>
         </div>
+        <br>
            <span>
             <%= f.submit "Add to Cart", class:'add-to-cart-btn' %> 
           </span>
-        <%end %><br>
-        <%= button_to 'Buy Now', checkouts_path, remote: true, params:{id: @product.id}, class:'add-to-cart-btn' %>
+        <%end %>
+        
       </div>
     </div>
   </div>

@@ -24,6 +24,10 @@ body {
   line-height: 18px;
 }
 
+.td-align{
+    vertical-align: middle;
+}
+
 
     /*card button  */
 
