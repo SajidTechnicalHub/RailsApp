@@ -27,7 +27,7 @@
       <td style="vertical-align: middle;"><h5><%= product.name %></h5></td>
       <td style="vertical-align: middle;"><h5><%= product.price %></h5></td>
       <td style="vertical-align: middle;"><h5><%= product.price*cart["quantity"].to_i %></h5>
-        <% session[:total] +=  product.price*cart["quantity"].to_i %>
+        <% session[:total] = session[:total]+(product.price*cart["quantity"].to_i) %>
       </td>
 
       <%= form_for :cart, url: update_cart_path, remote: true do |f| %>

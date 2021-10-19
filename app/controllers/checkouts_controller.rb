@@ -1,8 +1,11 @@
 class CheckoutsController < ApplicationController
   before_action :authenticate_user!
   def index
-    @shippings = Shipping.all
-   
+    @order_items = OrderItem.all
+    @order = current_user.orders.last
+    @order_item = @order.order_items.all
+    @order.update(status:'Paid')
+
   end
 
   def new
@@ -10,24 +13,10 @@ class CheckoutsController < ApplicationController
   end
 
   def create
-    
-    if params[:id]
-      product = Product.find(params[:id])
-      @session = Stripe::Checkout::Session.create({
-        payment_method_types: ['card'],
-        line_items: [{
-           name: product.name,
-           amount: product.price.to_i,
-           currency: 'usd',
-           quantity: 1,
-        }],
-        mode: 'payment',
-        success_url: checkouts_url,
-        cancel_url: root_url,
-      })
-    else
-      
-      @carts = session[:cart]
+      @order_items = OrderItem.all
+      @order = Order.find(params[:id])
+      @carts = @order.order_items.all
+      #@carts = session[:cart]
        
         @session = Stripe::Checkout::Session.create({
           payment_method_types: ['card'],
@@ -40,15 +29,14 @@ class CheckoutsController < ApplicationController
 
     respond_to do |format|
       format.js
-    end
-    
+
+    session[:cart] = nil
   end
 
   def product_items carts
     products = []
     carts.each do |cart|
-      product = Product.find_by(id: cart["id"])
-      products << {name: product.name, amount: product.price.to_i, currency: 'usd', quantity: cart['quantity'].to_i}
+      products << {name: cart.product.name, amount: cart.product.price.to_i, currency: 'usd', quantity: cart.quantity.to_i}
     end
     return products
   end

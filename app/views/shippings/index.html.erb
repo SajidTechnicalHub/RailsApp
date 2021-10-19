@@ -106,77 +106,75 @@ span.price {
 </style>
 
 
-
 <div class="row ">
   <div class="col-75 ">
     <div class="container">
-       <%= form_for  :shipping, url: shippings_path, local: true  do |form| %>
-      
-        <div class="row justify-content-center">
-          <div class="col-100">
-            <div class="text-center m-1"><h3 >Billing Address</h3></div>
+    	<%= form_for :shipping, url: shippings_path, local: true do |form| %>
+         <div class="row justify-content-center">
+           <div class="col-100">
+             <div class="text-center m-1"><h3 >Billing Address</h3></div>
 
-            <div class="row">
-              <div class="col-50">
-                <div class="field">
-                  <span class="d-flex flex-row"><i class="fa fa-user mr-1"></i> 
-                  <%= form.label :First_Name %></span>
-                  <%= form.text_field :fname, placeholder:"Ahmad" %>
-                </div>
-              </div>
-              <div class="col-50 ">
-                <div class="field ">
-                  <span class="d-flex flex-row"><i class="fa fa-user mr-1"></i> 
-                  <%= form.label :Lastst_Name %></span>
-                  <%= form.text_field :lname, placeholder:"Ali" %>
-                </div>
-              </div>
-            </div>
+             <div class="row">
+               <div class="col-50">
+                 <div class="field">
+                   <span class="d-flex flex-row"><i class="fa fa-user mr-1"></i> 
+                   <%= form.label :First_Name %></span>
+                   <%= form.text_field :fname, placeholder:"Ahmad" %>
+                 </div>
+               </div>
+               <div class="col-50 ">
+                 <div class="field ">
+                   <span class="d-flex flex-row"><i class="fa fa-user mr-1"></i> 
+                   <%= form.label :Lastst_Name %></span>
+                   <%= form.text_field :lname, placeholder:"Ali" %>
+                 </div>
+               </div>
+             </div>
 
-            <div class="field ">
-            <span class="d-flex flex-row"><i class="fa fa-envelope mr-1"></i>
-            <%= form.label :Email %></span>
-            <%= form.text_field :email, placeholder:"ali@gmail.com" %>
-            </div>
-            <div class="field ">
-              <span class="d-flex flex-row"><i class="fa fa-phone mr-1"></i>
-              <%= form.label :contact_number %></span>
-              <%= form.text_field :phone, placeholder:"+923001234567" %>
-            </div>
-            <div class="field ">
-              <span class="d-flex flex-row"><i class="fa fa-address-card-o mr-1"></i>
-              <%= form.label :Address %></span>
-              <%= form.text_field :address, placeholder:"542 W. 15th Street" %>
-            </div>
-            
-            <div class="field ">
-              <span class="d-flex flex-row"><i class="fa fa-institution mr-1"></i>
-              <%= form.label :City %></span>
-              <%= form.text_field :city, placeholder:"+923001234567" %>
-            </div>
+             <div class="field ">
+             <span class="d-flex flex-row"><i class="fa fa-envelope mr-1"></i>
+             <%= form.label :Email %></span>
+             <%= form.text_field :email, placeholder:"ali@gmail.com" %>
+             </div>
+             <div class="field ">
+               <span class="d-flex flex-row"><i class="fa fa-phone mr-1"></i>
+               <%= form.label :contact_number %></span>
+               <%= form.text_field :phone, placeholder:"+923001234567" %>
+             </div>
+             <div class="field ">
+               <span class="d-flex flex-row"><i class="fa fa-address-card-o mr-1"></i>
+               <%= form.label :Address %></span>
+               <%= form.text_field :address, placeholder:"542 W. 15th Street" %>
+             </div>
+             
+             <div class="field ">
+               <span class="d-flex flex-row"><i class="fa fa-institution mr-1"></i>
+               <%= form.label :City %></span>
+               <%= form.text_field :city, placeholder:"+923001234567" %>
+             </div>
 
-            <div class="row">
-              <div class="col-50">
-                <div class="field">
-                  <span class="d-flex flex-row"><i class="fa fa-home mr-1"></i> 
-                  <%= form.label :state %></span>
-                  <%= form.text_field :state, placeholder:"Kasur" %>
-                </div>
-              </div>
-              <div class="col-50 ">
-                <div class="field ">
-                  <span class="d-flex flex-row"><i class="fa fa-map-marker mr-1"></i> 
-                  <%= form.label :zip%></span>
-                  <%= form.text_field :zip, placeholder:"1001" %>
-                </div>
-              </div>
-            </div>
-          </div> 
-        </div>
-        <div class="actions text-center">
-          <%= form.submit 'Order Now', class:'btn btn-success', remote: true %>
-        </div>
-      <% end %>
+             <div class="row">
+               <div class="col-50">
+                 <div class="field">
+                   <span class="d-flex flex-row"><i class="fa fa-home mr-1"></i> 
+                   <%= form.label :state %></span>
+                   <%= form.text_field :state, placeholder:"Kasur" %>
+                 </div>
+               </div>
+               <div class="col-50 ">
+                 <div class="field ">
+                   <span class="d-flex flex-row"><i class="fa fa-map-marker mr-1"></i> 
+                   <%= form.label :zip%></span>
+                   <%= form.text_field :zip, placeholder:"1001" %>
+                 </div>
+               </div>
+             </div>
+           </div> 
+         </div>
+         <div class="actions text-center">
+           <%= form.submit 'Submit', class:'btn btn-success', remote: true %>
+         </div>
+       <% end %>
     </div>
   </div>
   <div class="col-25">
@@ -203,13 +201,9 @@ span.price {
 					</tr>
 					<tr>
 						<td>Total Bill</td>
-						<td>Rs. <%= session[:total]+200 %></td>
+						<td>Rs. <%= session[:total] %></td>
 					</tr>
-          <tr>
-            
-            <td><%= button_to 'Buy Now', checkouts_path, remote: true, class:'add-to-cart-btn' %></td>
-            <td></td>
-          </tr>
+          
 				</tbody>
 			</table>
 		</div>

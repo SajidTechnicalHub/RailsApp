@@ -1,0 +1,108 @@
+<div class="container">
+	<div class="row">
+		<div class="col-lg-12 ">
+			<div class="card">
+				<div class="card-body">
+					<h4>Shipping Details</h4>
+					<table class="table">
+						<tbody>
+							<% @shippings.each do |ship| %>
+							  <% if current_user.id == ship.user_id %>
+								<tr>
+									<td>Contact:</td>
+									<td><%= ship.email %>, <%= ship.phone %></td>	
+									<td></td>	
+									<td><%= link_to 'Change', edit_shipping_path(ship), class:'nav-link'%></td>
+								</tr>
+								<tr>
+									<td>Ship to:</td>
+									<td>
+										<%= ship.city %>, 
+										<%= ship.state %>,
+										<%= ship.zip %>
+									</td>
+									<td></td>
+									<td><%= link_to 'Change', edit_shipping_path(ship), class:'nav-link'%></td>
+								</tr>
+								
+								<% end %>
+							<% end %>
+						</tbody>
+					</table>
+				</div>
+			</div>
+		</div>
+	</div><br>
+	<div class="card">
+		<div class="card-body">
+			<h4>Order Details</h4>
+			<div class="row">
+				<div class="col-lg-7">
+					<div class="card">
+						<div class="card-header">
+							<h4 class="text-center">Order Items</h4>
+						</div>
+						<div class="card-body">
+							<table class="table table-hover">
+								<thead>
+									<th></th>
+									<th>Name</th>
+									<th>Unit Price</th>
+									<th>Quantity</th>
+									<th>Product Subtotal</th>
+								</thead>
+								<tbody>
+									<% @order_item.each do |p| %>
+									<tr>
+										<td style="vertical-align: middle;">
+										  <% if p.product.avatar.attached? %>
+										   <%= image_tag(p.product.avatar, style:'max-width: 100px; and max-height: 100px;')%>
+										  <% end %>
+										</td>
+										<td style="vertical-align: middle;"><%= p.product.name%></td>
+										<td style="vertical-align: middle;"><%= p.product.price%></td>
+										<td style="vertical-align: middle;"><%= p.quantity%>
+											
+										</td>
+										<td style="vertical-align: middle;"><%= p.quantity*p.product.price%></td>
+									</tr>
+									<%end%>
+								</tbody>
+							</table>
+						</div>
+					</div>
+				</div>
+				<div class="col-lg-5">
+					<div class="card">
+						<div class="card-header">
+							<h4 class="text-center">Your Order</h4>
+						</div>
+						<div class="card-body">
+							<table class="table table-hover">
+								<thead>
+									<th>Info</th>
+									<th>Price</th>
+								</thead>
+								<tbody>
+									<tr>
+										<td>Gross Total</td>
+										<td>Rs <%= @order.subtotal %></td>
+									</tr>
+									<tr>
+										<td>Discount </td>
+										<td>Rs. <%= @order.discount %></td>
+									</tr>
+									<tr>
+										<td>Total Bill </td>
+										<td>Rs. <%= @order.total %></td>
+									</tr>
+								</tbody>
+							</table>
+							<%= button_to 'Order Now', checkouts_path, remote: true, class:'add-to-cart-btn' %>
+						</div>
+					</div>
+				</div>
+			</div>
+		</div>
+	</div>
+</div>
