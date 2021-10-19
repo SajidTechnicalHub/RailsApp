@@ -98,14 +98,6 @@ class ProductsController < ApplicationController
       authorize @product
     end
 
-    def initialize_session
-      session[:cart] ||= []
-    end
-
-    def load_cart
-      @cart = session[:cart]
-
-    end
 
     # Only allow a list of trusted parameters through.
     def product_params

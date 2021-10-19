@@ -4,7 +4,13 @@
         <li class="breadcrumb-item">
           <%= link_to 'Home', root_path %>
         </li>
-        <li class="breadcrumb-item active" aria-current="page">Products</li>
+        <li class="breadcrumb-item">
+          <%= link_to 'Categories', root_path %>
+        </li>
+        <% if @category.blank? %>
+        <% else %>
+          <li class="breadcrumb-item active" aria-current="page"><%=@category.name %></li>
+         <% end %>
       </ol>
     </nav>
 <div class="container">
