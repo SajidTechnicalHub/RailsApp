@@ -1,75 +1,89 @@
 
-<div >
-  <h1>Cart Items</h1> 
-</div>
-<table class="table  table-hover ">
-  <thead class="thead-light" >
-    <tr>
-      <th></th>
-      <th>Item Name</th>
-      <th>Unit Price</th>
-      <th>Sub   Total</th>
-      <th>Quantity</th>
-      <th></th>
-      <th>Action</th>
-      
-    </tr>
-  </thead>
-  <tbody >
-    <% @carts.each do |cart| %>
-      <% product = Product.find_by(id: cart["id"]) %>
-    <tr>
-      <td style="vertical-align: middle;">
-        <% if product.avatar.attached? %>
-         <%= link_to image_tag(product.avatar, style:'max-width: 200px; and max-height: 200px;'), product_path(product.id) %>
+<nav aria-label="breadcrumb">
+  <ol class="breadcrumb">
+    <li class="breadcrumb-item">
+      <%= link_to 'Home', root_path %>
+    </li>
+    <li class="breadcrumb-item">
+      <%= link_to 'Products', root_path %>
+    </li>
+    <li class="breadcrumb-item active" aria-current="page">Cart</li>
+  </ol>
+</nav>
+<div class="container">
+  <div class="card">
+    <div class="card-body">
+      <table class="table  table-hover ">
+        <thead class="thead-light" >
+          <tr>
+            <th></th>
+            <th>Item Name</th>
+            <th>Unit Price</th>
+            <th>Sub   Total</th>
+            <th>Quantity</th>
+            <th></th>
+            <th>Action</th>
+            
+          </tr>
+        </thead>
+        <tbody >
+          <% @carts.each do |cart| %>
+            <% product = Product.find_by(id: cart["id"]) %>
+          <tr>
+            <td style="vertical-align: middle;">
+              <% if product.avatar.attached? %>
+               <%= link_to image_tag(product.avatar, style:'max-width: 200px; and max-height: 200px;'), product_path(product.id) %>
+              <% end %>
+            </td>
+            <td style="vertical-align: middle;"><h5><%= product.name %></h5></td>
+            <td style="vertical-align: middle;"><h5><%= product.price %></h5></td>
+            <td style="vertical-align: middle;"><h5><%= product.price*cart["quantity"].to_i %></h5>
+              <% session[:total] = session[:total]+(product.price*cart["quantity"].to_i) %>
+            </td>
+
+            <%= form_for :cart, url: update_cart_path, remote: true do |f| %>
+              <td style="vertical-align: middle;" >
+                <%= f.hidden_field :product_id, :value => product.id %>
+                <%= f.number_field :product_quantity, :value => cart["quantity"].to_i, style: 'max-width:60px', class: 'form-control' %>
+              </td>
+              <td style="vertical-align: middle;"><%= f.submit "Update",class:'btn btn-outline-info btn-sm' %></td>
+              <td style="vertical-align: middle;">
+                <%= link_to 'Delete', cart_path(cart["id"]),class:'btn btn-outline-danger btn-sm', method: :delete, data: {confirm: 'Are you sure!'}  %>
+              </td>
+            <%end %>
+           
+          </tr>
         <% end %>
-      </td>
-      <td style="vertical-align: middle;"><h5><%= product.name %></h5></td>
-      <td style="vertical-align: middle;"><h5><%= product.price %></h5></td>
-      <td style="vertical-align: middle;"><h5><%= product.price*cart["quantity"].to_i %></h5>
-        <% session[:total] = session[:total]+(product.price*cart["quantity"].to_i) %>
-      </td>
+          
+          
+        </tbody>
+      </table>
+      <table class="table table-hover">
+        <tbody>
+          <tr><td></td>
+            <td></td>
+            <td></td>
+            <td style="vertical-align: middle;"><h5>Total Item(s) you have selected:</h5></td>
+            <td style="vertical-align: middle;"><h5><%= @carts.size %></h5></td>
+            <td style="vertical-align: middle;"><h5>Total Price</h5></td>
+             <td style="vertical-align: middle;"><h5>Rs: <%= session[:total] %></h5></td>
+          
+          <td style="vertical-align: middle;"><%= link_to 'KEEP SHOPPING', root_path, class: 'btn btn-warning' %></td>
 
-      <%= form_for :cart, url: update_cart_path, remote: true do |f| %>
-        <td style="vertical-align: middle;" >
-          <%= f.hidden_field :product_id, :value => product.id %>
-          <%= f.number_field :product_quantity, :value => cart["quantity"].to_i, style: 'max-width:60px', class: 'form-control' %>
-        </td>
-        <td style="vertical-align: middle;"><%= f.submit "Update",class:'btn btn-outline-info btn-sm' %></td>
-        <td style="vertical-align: middle;">
-          <%= link_to 'Delete', cart_path(cart["id"]),class:'btn btn-outline-danger btn-sm', method: :delete, data: {confirm: 'Are you sure!'}  %>
-        </td>
-      <%end %>
-     
-    </tr>
-  <% end %>
-    
-    
-  </tbody>
-</table>
-<table class="table table-hover">
-  <tbody>
-    <tr><td></td>
-      <td></td>
-      <td></td>
-      <td style="vertical-align: middle;"><h5>Total Item(s) you have selected:</h5></td>
-      <td style="vertical-align: middle;"><h5><%= @carts.size %></h5></td>
-      <td style="vertical-align: middle;"><h5>Total Price</h5></td>
-       <td style="vertical-align: middle;"><h5>Rs: <%= session[:total] %></h5></td>
-    
-    <td style="vertical-align: middle;"><%= link_to 'KEEP SHOPPING', root_path, class: 'btn btn-warning' %></td>
-
-    <% if @carts.size == 0 %>
-      <div class="text-center">
-        <h2>Cart Empty!</h2>
-      </div>
-      <% else %>
-        <td style="vertical-align: middle;"><%= link_to 'proceed to checkout', shippings_path, class:'btn btn-outline-success text-uppercase' %></td>
-    <% end %>
-    <td></td>
-    </tr>
-  </tbody>
-</table>
+          <% if @carts.size == 0 %>
+            <div class="text-center">
+              <h2>Cart Empty!</h2>
+            </div>
+            <% else %>
+              <td style="vertical-align: middle;"><%= link_to 'proceed to checkout', shippings_path, class:'btn btn-outline-success text-uppercase' %></td>
+          <% end %>
+          <td></td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+  </div>
+</div>
 
 
 
