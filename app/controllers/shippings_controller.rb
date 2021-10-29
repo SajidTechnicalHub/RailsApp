@@ -37,7 +37,7 @@ class ShippingsController < ApplicationController
       end
 
     end
-    #session[:cart] = nil
+    session[:cart] = nil
   end
   def edit
     @shipping = Shipping.find(params[:id])

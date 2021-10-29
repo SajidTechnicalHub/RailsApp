@@ -60,6 +60,7 @@
           <%= f.hidden_field :product_id, :value => @product.id %>
         </div>
         <div class="field">
+          <%= f.label :Select_quantity, class:'text-capitalize font-weight-normal' %>
           <%= f.number_field :product_quantity, value:1, class: 'form-control'  %>
         </div>
         <br>
@@ -148,7 +149,10 @@
         <% if @product.ratings.blank? %>
           <p>No Review Yet! Give first Review. </p>
         <% else %>
-          <%= render 'products/message' %>
+        <div id="messages">
+          <%= render 'products/message', message: @message %>
+        </div>
+          
          <% end %>
          
           <%= link_to 'Write a Review', new_product_rating_path(@product) %> 

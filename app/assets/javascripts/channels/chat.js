@@ -1,6 +1,7 @@
-# app/assets/javascripts/channels/chat.js
+
 App.chat = App.cable.subscriptions.create("ChatChannel", {
   connected: function() {
+    console.log("connected");
     // Called when the subscription is ready for use on the server
   },
 
@@ -9,7 +10,8 @@ App.chat = App.cable.subscriptions.create("ChatChannel", {
   },
 
   received: function(data) {
+    
     // Called when there's incoming data on the websocket for this channel
-    $('.messages').prepend(data['message']);
+    $('#messages').prepend(data['message']);
   },
 });

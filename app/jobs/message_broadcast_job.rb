@@ -8,6 +8,9 @@ class MessageBroadcastJob < ApplicationJob
   private
 
   def render_message(message)
-    MessagesController.render(partial: 'message', locals: {message: rating}).squish
+    MessagesController.render(
+      partial: 'message', 
+      locals: {message: message}
+      ).squish
   end
 end
