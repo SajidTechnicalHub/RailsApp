@@ -29,8 +29,7 @@ class ProductsController < ApplicationController
 
   # GET /products/1 or /products/1.json
   def show
-    @order_item = current_order.order_items.new
-
+      #@message = Rating.all
     if @product.ratings.blank?
       $average_rating = 0
     else

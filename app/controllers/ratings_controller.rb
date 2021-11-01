@@ -22,13 +22,6 @@ class RatingsController < ApplicationController
 
   # POST /ratings or /ratings.json
   def create
-    #message = Rating.create(params[:message].permit!)
-       # ActionCable.server.broadcast "chat", { 
-       #   message: MessagesController.render(
-       #     partial: 'message', 
-       #     locals: { message: message }
-       #   ).squish 
-       # }
     @rating = Rating.new(rating_params)
     @rating.user_id = current_user.id
     @rating.product_id = @product.id

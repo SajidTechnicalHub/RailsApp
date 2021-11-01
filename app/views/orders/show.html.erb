@@ -98,7 +98,7 @@
 									</tr>
 								</tbody>
 							</table>
-							<%= button_to 'Order Now', checkouts_path, remote: true, class:'add-to-cart-btn' %>
+							<%= button_to 'Order Now', checkouts_path(id: @order.id), remote: true, class:'add-to-cart-btn' %>
 						</div>
 					</div>
 				</div>
