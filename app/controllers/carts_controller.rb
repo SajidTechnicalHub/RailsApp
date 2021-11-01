@@ -15,11 +15,11 @@ class CartsController < ApplicationController
     
     if session[:cart].select{|cart| cart["id"] == product_id}.present?
       session[:cart].find{|cart| cart["id"] == product_id}["quantity"] = product_quantity
-    
-       respond_to do |format|
-        format.js { render 'index.js.erb'}
-        format.html {  redirect_to carts_path}
-      end
+      redirect_to carts_path
+       #respond_to do |format|
+        #format.js { render 'index.js.erb'}
+        #format.html {  redirect_to carts_path}
+      
     end
      
    

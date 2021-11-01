@@ -149,11 +149,11 @@
         <% if @product.ratings.blank? %>
           <p>No Review Yet! Give first Review. </p>
         <% else %>
-        <div id="messages">
-          <%= render 'products/message', message: @message %>
-        </div>
+            <div id="messages">
+              <%= render 'products/message' %>
+            </div>
           
-         <% end %>
+        <% end %>
          
           <%= link_to 'Write a Review', new_product_rating_path(@product) %> 
     </div>
@@ -189,11 +189,4 @@
   });
 </script>
 
-<script>
-  $(document).ready(function(){
-  $("").click(function(){
-    $(this).hide();
-  });
-});
-</script>
 
