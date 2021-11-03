@@ -21,6 +21,10 @@ body {
   font-size: 12px;
   line-height: 18px;
 }
+.breadcrumb {
+    margin-bottom: 0;
+    background-color:#f9f9f9;
+}
 
 .td-align{
     vertical-align: middle;
@@ -110,8 +114,16 @@ nav li a:hover, nav li a:focus{
 /* ligin profile */
 
 .profile{
-    width: 30px;
-    height: 30px;
+    width: 40px;
+    height: 40px;
+    text-align: center;
+    border-radius: 50%;
+    border: 2px solid gray;
+    background-color: lightpink;
+}
+.dash-profile{
+    width: 150px;
+    height: 150px;
     text-align: center;
     border-radius: 50%;
     border: 2px solid gray;

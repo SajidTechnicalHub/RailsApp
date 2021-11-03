@@ -7,6 +7,28 @@
         <%= render "devise/shared/error_messages", resource: resource %>
 
         <div class="field">
+          <% if resource.avatar.attached? %>
+            <%= image_tag(resource.avatar) %>
+          <% else %>
+            <%= image_tag("default_profile.jpeg") %>
+          <% end %>
+        </div>
+
+        <div class="row">
+          <div class="col-6">
+            <div class="field">
+              <%= f.label :First_name, class:'text-capitalize' %><br />
+              <%= f.text_field :fname, autofocus: true, autocomplete: "fname", class: 'form-control' %>
+            </div>
+          </div>
+          <div class="col-6">
+            <div class="field">
+              <%= f.label :Last_name, class:'text-capitalize' %><br />
+              <%= f.text_field :lname, autofocus: true, autocomplete: "lname", class: 'form-control' %>
+            </div>
+          </div>
+        </div>
+        <div class="field">
           <%= f.label :email %><br />
           <%= f.email_field :email, autofocus: true, autocomplete: "email", class: 'form-control' %>
         </div>
@@ -25,7 +47,7 @@
         </div>
 
         <div class="field">
-          <%= f.label :User_Status %><br />
+          <%= f.label :User_Status, class:'text-capitalize' %><br />
           <%= f.select :status, ['moderator', 'buyer'],{ prompt:'Chose User Status' }, { class: 'form-control' }%>
 
         </div>

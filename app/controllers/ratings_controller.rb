@@ -1,5 +1,5 @@
 class RatingsController < ApplicationController
-  before_action :set_rating, only: %i[ show edit update destroy ]
+  before_action :set_rating, only: %i[ show edit update  ]
   before_action :set_product
   before_action :authenticate_user!
   # GET /ratings or /ratings.json
@@ -52,9 +52,10 @@ class RatingsController < ApplicationController
 
   # DELETE /ratings/1 or /ratings/1.json
   def destroy
+    @rating = @product.ratings.find(params[:id])
     @rating.destroy
     respond_to do |format|
-      format.html { redirect_to ratings_url, notice: "Rating was successfully destroyed." }
+      format.html { redirect_to @product, notice: "Rating was successfully destroyed." }
       format.json { head :no_content }
     end
   end

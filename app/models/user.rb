@@ -8,9 +8,27 @@ class User < ApplicationRecord
   devise :database_authenticatable, :registerable,
          :recoverable, :rememberable, :validatable
 
+  has_one_attached :avatar
+
+
+  def avatar_thumbnail
+    if avatar.attached?
+      #avatar.variant(resize: '150*150!').processed
+    else
+      '/default_profile.jpeg'
+   end
+  end
+
+
    enum status: {
     buyer: 0,
     moderator: 1
     
   }
+
+
+private
+  
+  
+
 end
