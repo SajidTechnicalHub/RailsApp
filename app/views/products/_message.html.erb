@@ -1,29 +1,40 @@
-<% @product.ratings.each do |r| %>
-          <div class="row align-items-center">
-            <div class="col-5  d-flex flex-row align-items-center">
-              <div class=" mr-1">
-                <%= link_to image_tag("1.jpg", {class:'comment-profile'}), root_path %>
-              </div>
-              <span class="font-weight-bold align-items-center"><%= link_to 'Username', root_path %></span>
-            </div>
-            <div class="col-7 align-items-center">
-              <div class="star-rating" data-score = "<%= r.rating %>"> </div>
-            </div>
-          </div>
-          <div class="row">
-            <div class="col-2"></div>
-             <div class="col-10  comment">
-               <%= r.comment %>
-             </div>
-          </div>
-          <div class="row">
-            <div class="col-3"></div>
-            <div class="col-1">
-              <span><%= link_to 'like', '#', class:'nav-link' %></span>
-            </div>
-            <div class="col-1">
-               <span><%= link_to 'Reply', '#', class:'nav-link' %></span>
-            </div>
-          </div>
-            
-          <% end %>
+
+<% @rating.each do |r| %>
+  <div class="row align-items-center">
+    <div class="col-5  d-flex flex-row align-items-center">
+      <div class=" mr-1">
+        <% if r.user.avatar.attached? %>
+          <%= link_to image_tag(r.user.avatar, {class:'comment-profile'}), accounts_path %>
+        <% else %>
+          <%= image_tag("default_profile.jpeg", {class:'comment-profile'}) %>
+        <% end %>
+      </div>
+      <span class="font-weight-bold align-items-center"><%= link_to "#{r.user.fname} #{r.user.lname}", accounts_path %></span>
+
+    </div>
+    <div class="col-6">
+      <div class="star-rating" data-score = "<%= r.rating %>"> </div>
+    </div>
+  </div>
+  <div class="row">
+    <div class="col-2"></div>
+     <div class="col-10 mt-1  comment">
+       <%= r.comment %>
+     </div>
+  </div>
+  <div class="row">
+    <div class="col-2"></div>
+    <div class="col-1 mr-2">
+      <span><%= link_to 'like', '#', class:'nav-link' %></span>
+    </div>
+    <div class="col-2">
+       <span><%= link_to 'Reply', '#', class:'nav-link' %></span>
+    </div>
+    
+   <% if user_signed_in? && current_user.status == 'moderator' %>
+      <div class="col-1">
+       <span><%= link_to 'Delete',product_rating_path(product_id:@product, id:r), method: :delete, class:'nav-link' %></span>
+     </div>
+    <% end %>
+  </div>            
+<% end %>
