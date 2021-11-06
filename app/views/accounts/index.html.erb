@@ -209,7 +209,7 @@
                                   <% if current_user.avatar.attached? %>
                                       <%= image_tag(current_user.avatar,{class:'dash-profile'})  %>
                                   <% else %>
-                                      <%= image_tag("default_profile.jpeg") %>
+                                      <%= image_tag("profile.png") %> 
                                   <% end %>
                                  </div>
                                 <h4 class="f-w-600"><%= "#{current_user.fname} #{current_user.lname}" %></h4>
