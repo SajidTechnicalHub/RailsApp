@@ -38,6 +38,7 @@ class ShippingsController < ApplicationController
 
     end
     session[:cart] = nil
+    session[:total] = nil
   end
   def edit
     @shipping = Shipping.find(params[:id])

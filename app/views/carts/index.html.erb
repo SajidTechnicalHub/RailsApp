@@ -75,6 +75,7 @@
           <% if @carts.size == 0 %>
             <div class="text-center">
               <h2>Cart Empty!</h2>
+              <% session[:total] = nil %>
             </div>
             <% else %>
               <td style="vertical-align: middle;"><%= link_to 'proceed to checkout', shippings_path, class:'btn btn-outline-success text-uppercase' %></td>
@@ -83,6 +84,7 @@
           </tr>
         </tbody>
       </table>
+
     </div>
   </div>
 </div>
