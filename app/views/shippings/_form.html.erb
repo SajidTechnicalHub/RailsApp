@@ -38,7 +38,7 @@ body {
   padding: 0 16px;
 }
 
-.container {
+.container1 {
   background-color: #f2f2f2;
   padding: 5px 20px 15px 20px;
   border: 1px solid lightgrey;
@@ -114,14 +114,14 @@ span.price {
               <div class="col-50">
                 <div class="field">
                   <span class="d-flex flex-row"><i class="fa fa-user mr-1"></i> 
-                  <%= form.label :First_Name %></span>
+                  <%= form.label :First_Name, class:'text-capitalize' %></span>
                   <%= form.text_field :fname, placeholder:"Ahmad" %>
                 </div>
               </div>
               <div class="col-50 ">
                 <div class="field ">
                   <span class="d-flex flex-row"><i class="fa fa-user mr-1"></i> 
-                  <%= form.label :Lastst_Name %></span>
+                  <%= form.label :Last_Name, class:'text-capitalize' %></span>
                   <%= form.text_field :lname, placeholder:"Ali" %>
                 </div>
               </div>
@@ -134,7 +134,7 @@ span.price {
             </div>
             <div class="field ">
               <span class="d-flex flex-row"><i class="fa fa-phone mr-1"></i>
-              <%= form.label :contact_number %></span>
+              <%= form.label :contact_number, class:'text-capitalize' %></span>
               <%= form.text_field :phone, placeholder:"+923001234567" %>
             </div>
             <div class="field ">
@@ -171,3 +171,4 @@ span.price {
           <%= form.submit 'Submit', class:'btn btn-success', remote: true %>
         </div>
       <% end %>
+      
