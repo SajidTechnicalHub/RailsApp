@@ -6,7 +6,7 @@
         <% if r.user.avatar.attached? %>
           <%= link_to image_tag(r.user.avatar, {class:'comment-profile'}), accounts_path %>
         <% else %>
-          <%= image_tag("default_profile.jpeg", {class:'comment-profile'}) %>
+          <%= image_tag("profile.png", {class:'comment-profile'}) %>
         <% end %>
       </div>
       <span class="font-weight-bold align-items-center"><%= link_to "#{r.user.fname} #{r.user.lname}", accounts_path %></span>
