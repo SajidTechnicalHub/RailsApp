@@ -34,7 +34,7 @@ class ProductsController < ApplicationController
     if @product.ratings.blank?
       $average_rating = 0
     else
-      $average_rating = @product.ratings.average(:rating).round(2)
+      $average_rating = @product.ratings.average(:rating)
     end
     
   end
