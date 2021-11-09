@@ -163,25 +163,18 @@
 
 
 <script>
-  $('.star-rating').raty({
-    path: '/public/assets/images/',
-    readOnly: true,
-    score: function(){
-      return $(this).attr('data-score');
-    }
-
+  $('.star-rating').rateYo({
+    rating: 3.6,
+    starWidth: "25px"
   });
 </script>
 
 <script>
-  $('.average-review-rating').raty({
-    readOnly: true,
-    path: '/assets/',
-    score: function(){
-      return $(this).attr('data-score');
-    }
-
+  $('.average-review-rating').rateYo({
+    rating: 3.6,
+    starWidth: "25px"
   });
+
 </script>
 
 

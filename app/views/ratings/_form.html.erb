@@ -11,6 +11,17 @@
     </div>
   <% end %>
 
+  <div class="rateyo" id= "rating"
+           data-rateyo-rating="0"
+           data-rateyo-num-stars="5"
+           data-rateyo-score="3"></div>
+      <span class='score'>0</span>
+      <span class='result'>0</span>
+      <input type="text" name="rating">
+  </div>
+
+
+
   <div id="rating-form">
     <%= form.label :rating %>
     
@@ -32,5 +43,16 @@
     path: '/assets/',
     scoreName: "rating[rating]"
 
+  });
+</script>
+
+<script>
+  $(function () {
+      $(".rateyo").rateYo().on("rateyo.change", function (e, data) {
+          var rating = data.rating;
+          $(this).parent().find('.score').text('score :'+ $(this).attr('data-rateyo-score'));
+          $(this).parent().find('.result').text('rating :'+ rating);
+          $(this).parent().find('input[name=rating]').val(rating); //add rating value to input field
+      });
   });
 </script>
