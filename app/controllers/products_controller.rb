@@ -3,25 +3,27 @@ class ProductsController < ApplicationController
   before_action :authenticate_user!, only:[:new, :edit]
  
   $average_rating = 0
-
+ 
   # GET /products or /products.json
   def index
+    
     # Category Search by name onclick dropdown menu.
      if params[:category]
       #@products = Product.all.order("created_at DESC")
       @category_id = Category.find_by(name: params[:category]).id
-      @products = Product.where(:category_id => @category_id)
+      @products = Product.where(:category_id => @category_id).page(params[:page])
     elsif params[:q]
-      @products = Product.where("name ILIKE ?", "%#{ params[:q]}%")
+      @products = Product.where("name ILIKE ?", "%#{ params[:q]}%").page(params[:page])
       if @products.blank? 
         flash[:notice] = "No Record Found." 
       end
     elsif params[:id]
       @category = Category.find(params[:id])
-      @products = @category.products.all
+      @products = @category.products.page(params[:page])
       
     else
-      @products = Product.all.order("created_at DESC")
+      @products = Product.page(params[:page])
+
     end
 
     authorize @products
@@ -34,7 +36,7 @@ class ProductsController < ApplicationController
     if @product.ratings.blank?
       $average_rating = 0
     else
-      $average_rating = @product.ratings.average(:rating)
+      $average_rating = @product.ratings.average(:rating).round(1)
     end
     
   end

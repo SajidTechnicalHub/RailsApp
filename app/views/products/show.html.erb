@@ -105,8 +105,9 @@
     </div>
   <div class="row col-12">
     <div class="col-12 m-2">
-    <div class="average-review-rating" data-score= "<%= $average_rating %>"></div>
-    <span>Based on <%= @product.ratings.count  %> reviews.</span><br>
+      <div class="average-review-rating"></div>
+      <span class="font-weight-bold"><%= $average_rating %></span>
+      <span>Based on <span class="font-weight-bold"><%= @product.ratings.count  %></span> reviews.</span><br>
     </div>
   </div>
   <div class="row col-12">
@@ -162,17 +163,11 @@
 
 
 
-<script>
-  $('.star-rating').rateYo({
-    rating: 3.5,
-    starWidth: "25px",
-    readOnly: true
-  });
-</script>
+
 
 <script>
   $('.average-review-rating').rateYo({
-    rating: 3.5,
+    rating: '<%= $average_rating %>',
     starWidth: "25px",
     readOnly: true
   });

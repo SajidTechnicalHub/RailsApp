@@ -12,8 +12,14 @@
       <span class="font-weight-bold align-items-center"><%= link_to "#{r.user.fname} #{r.user.lname}", accounts_path %></span>
 
     </div>
-    <div class="col-6">
-      <div class="star-rating" data-score = "<%= r.rating %>"> </div>
+    <div class="col-6 d-flex flex-row align-items-center">
+
+      <div class="star-rating"> </div>
+      <% if r.rating.blank? %>
+        <span style="font-size: 20px;"><%= 0 %>/5</span>
+      <% else %>
+        <span  style="font-size: 20px;"><%= r.rating %>/5</span>
+      <% end %>
     </div>
   </div>
   <div class="row">
@@ -36,5 +42,13 @@
        <span><%= link_to 'Delete',product_rating_path(product_id:@product, id:r), method: :delete, class:'nav-link' %></span>
      </div>
     <% end %>
-  </div>            
+  </div>   
+
+<script>
+  $('.star-rating').rateYo({
+    rating: '<%= r.rating %>',
+    starWidth: "25px",
+    readOnly: true
+  });
+</script>
 <% end %>
