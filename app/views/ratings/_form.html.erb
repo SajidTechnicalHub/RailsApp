@@ -11,21 +11,10 @@
     </div>
   <% end %>
 
-  <div class="rateyo" id= "rating"
-           data-rateyo-rating="0"
-           data-rateyo-num-stars="5"
-           data-rateyo-score="3"></div>
-      <span class='score'>0</span>
-      <span class='result'>0</span>
-      <%= form.text_field :rating %>
-      <input type="text" name="rating">
-  </div>
-
-
-
-  <div id="rating-form">
-    <%= form.label :rating %>
-    
+  <div class="field d-flex flex-row align-items-center">
+  <div class="rateyo" data-rateyo-rating="0" data-rateyo-num-stars="5"></div>
+      <span class='result' >(0)</span>
+      <%= form.hidden_field :rating, id:'textbox2' %>
   </div>
 
   <div class="field">
@@ -39,21 +28,16 @@
   </div>
 <% end %>
 
-<script>
-  $('#rating-form').raty({
-    path: '/assets/',
-    scoreName: "rating[rating]"
 
-  });
-</script>
 
 <script>
   $(function () {
       $(".rateyo").rateYo().on("rateyo.change", function (e, data) {
           var rating = data.rating;
-          $(this).parent().find('.score').text('score :'+ $(this).attr('data-rateyo-score'));
-          $(this).parent().find('.result').text('rating :'+ rating);
-          $(this).parent().find('input[name=rating]').val(rating); //add rating value to input field
+    
+          $(this).parent().find('.result').text('('+rating+')' );
+          $(this).parent().find('#textbox2').val(rating);
+        });
       });
-  });
+
 </script>
