@@ -5,6 +5,9 @@ class RatingsController < ApplicationController
   # GET /ratings or /ratings.json
   def index
     @ratings = Rating.all
+      @product_ratings = @product.ratings.all
+      @c_user_rating = current_user.product_ratings.all
+
   end
 
   # GET /ratings/1 or /ratings/1.json
