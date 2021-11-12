@@ -1,5 +1,5 @@
 class Product < ApplicationRecord
-  paginates_per 5
+  paginates_per 12
   belongs_to :user
   belongs_to :category
   has_many :order_items
